@@ -1,0 +1,278 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Books Website 6003
+  description: Back end of a bookselling website for 6003CEM coursework
+  contact:
+    name: Nathan
+    email: luckn2@coventry.ac.uk
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'https://analogcontact-handgabriel-3000.codio-box.uk/api/v1/'
+    description: Development server
+tags:
+  - name: Users
+    description: User management
+  - name: Books
+    description: CRUD operations for the books on the website
+paths:
+  /users:
+    get:
+      tags:
+        - Users
+      description:
+        Displays all accounts if requested by an admin 
+      reponses:
+        "200":
+          description: View of all of the accounts in the database
+        "401":
+          description: User denied access due to not being an admin
+        "500":
+          description: Error during the request
+    post:
+      tags:
+        - Users
+      description:
+        Create a new account with the given user information 
+      reponses:
+        "200":
+          description: The user creates an account
+        "500":
+          description: Error during the request
+  /users/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: Unique identifier for the user accounts
+    get:
+      tags:
+        - Users
+      description:
+        Display the user from their ID
+      responses:
+        "200":
+          description: View the user account by the specified id
+        "401":
+          description: No user found with the specified ID
+        "402":
+          description: You cannot access other people's account details unless you are an admin
+        "500":
+          description: Error during the request
+    put:
+      tags:
+        - Users
+      description:
+        Edit a user's information
+      responses:
+        "200":
+          description: Edit the user account by the specified id
+        "401":
+          description: No user found with the specified ID
+        "402":
+          description: You cannot edit other people's account details unless you are an admin
+        "500":
+          description: Error during the request
+    delete:
+      tags:
+        - Users
+      description:
+        Delete a user's account
+      responses:
+        "200":
+          description: Delete the user account by the specified id
+        "401":
+          description: No user found with the specified ID
+        "402":
+          description: You cannot delete other people's account details unless you are an admin
+        "500":
+          description: Error during the request
+paths:
+  /books:
+    get:
+      tags:
+        - Books
+      description:
+        Displays all books 
+      reponses:
+        "200":
+          description: View of all of the books in the database
+        "500":
+          description: Error during the request
+    post:
+      tags:
+        - Books
+      description:
+        Create a new book entry 
+      reponses:
+        "200":
+          description: New book is created and ID returned to the user
+        "402":
+          description: Only admins can create new books
+        "500":
+          description: Error during the request
+  /books/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: Unique identifier for the books
+    get:
+      tags:
+        - Books
+      description:
+        Displays the specified book 
+      reponses:
+        "200":
+          description: View of the requested book
+        "401":
+          description: No book with the specified ID
+        "500":
+          description: Error during the request
+    put:
+      tags:
+        - Books
+      description:
+        Update a book entry 
+      reponses:
+        "200":
+          description: Book is updated and returned to the user
+        "402":
+          description: Only admins can update books
+        "500":
+          description: Error during the request
+    delete:
+      tags:
+        - Books
+      description:
+        Delete a book entry 
+      reponses:
+        "200":
+          description: Book is deleted and ID returned to the user
+        "402":
+          description: Only admins can delete books
+        "500":
+          description: Error during the request
+  /books/{id}/cart:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: Unique identifier for the books
+    get:
+      tags:
+        - Books
+        - Cart
+      description:
+        Check if the specified book is in the user's cart
+      reponses:
+        "200":
+          description: Boolean value of whether the item is in the user's cart
+        "500":
+          description: Error during the request
+    post:
+      tags:
+        - Books
+        - Cart
+      description:
+        Add a book to your cart 
+      reponses:
+        "200":
+          description: Book is added to the user's cart
+        "500":
+          description: Error during the request
+    delete:
+      tags:
+        - Books
+        - Cart
+      description:
+        Remove a book from your cart
+      reponses:
+        "200":
+          description: Book is removed from the user's cart
+        "500":
+          description: Error during the request
+  /books/{id}/wishlist:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: Unique identifier for the books
+    get:
+      tags:
+        - Books
+        - Wishlist
+      description:
+        Check if the specified book is in the user's wishlist
+      reponses:
+        "200":
+          description: Boolean value of whether the item is in the user's wishlist
+        "500":
+          description: Error during the request
+    post:
+      tags:
+        - Books
+        - Wishlist
+      description:
+        Add a book to your wishlist 
+      reponses:
+        "200":
+          description: Book is added to the user's wishlist
+        "500":
+          description: Error during the request
+    delete:
+      tags:
+        - Books
+        - Wishlist
+      description:
+        Remove a book from your wishlist
+      reponses:
+        "200":
+          description: Book is removed from the user's wishlist
+        "500":
+          description: Error during the request
+  /books/cart:
+    get:
+      tags:
+        - Books
+        - Cart
+      description:
+        Displays the user's cart
+      reponses:
+        "200":
+          description: View of books in the user's cart
+        "500":
+          description: Error during the request
+  /books/wishlist:
+    get:
+      tags:
+        - Books
+        - Wishlist
+      description:
+        Displays the user's wishlist
+      reponses:
+        "200":
+          description: View of books in the user's wishlist
+        "500":
+          description: Error during the request
+  /login:
+    post:
+      tags:
+        - Users
+      description:
+        Creates an account using the request body
+      responses:
+        "200":
+          description: Created the user account and returns the user info with a JWT token
+        "500":
+          description: Error during the request

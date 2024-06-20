@@ -1,0 +1,50 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "/user",
+    "title": "User",
+    "description": "A user on the website",
+    "type": "object",
+    "properties": {
+        "ID": {
+            "type": "integer",
+            "description": "Id number referencing the user"
+        },
+        "username": {
+            "type": "string",
+            "description": "User's username"
+        },
+        "firstName": {
+            "type": "string",
+            "description": "User's first name"
+        },
+        "lastName": {
+            "type": "string",
+            "description": "User's surname"
+        },
+        "access": {
+            "type": "string",
+            "description": "User's access level"
+        },
+        "dateRegistered": {
+            "type": "string",
+            "description": "Date of the user's account creation"
+        },
+        "password": {
+            "type": "string",
+            "description": "User password"
+        },
+        "passwordSalt": {
+            "type": "string",
+            "description": "Salted user password"
+        },
+        "email": {
+            "type": "string",
+            "description": "User email"
+        },
+        "avatarURL": {
+            "type": "uri",
+            "description": "Profile picture URL"
+        }
+    },
+    "required": ["firstName", "lastName", "email", "password", "access"]
+}

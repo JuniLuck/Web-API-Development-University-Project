@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "/book",
+    "title": "Book",
+    "description": "A book on the website",
+    "type": "object",
+    "properties": {
+        "ID": {
+            "type": "integer",
+            "description": "Id number referencing the book"
+        },
+        "bookTitle": {
+            "type": "string",
+            "description": "Book title"
+        },
+        "blurb": {
+            "type": "string",
+            "description": "Brief description of the book"
+        },
+        "authorID": {
+            "type": "string",
+            "description": "Id referencing the book's author"
+        },
+        "bookCoverURL": {
+            "type": "uri",
+            "description": "URL for the image of the book's cover"
+        },
+        "price": {
+            "type": "float",
+            "description": "Price of the book"
+        },
+        "publicationDate": {
+            "type": "string",
+            "description": "Date of the book's publication"
+        }
+    },
+    "required": ["bookTitle", "authorID"]
+}
